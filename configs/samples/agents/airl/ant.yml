@@ -1,0 +1,92 @@
+obj: airl
+IS: false
+seed: 23
+cuda: -1
+env:
+  env_name: AntFH-v0
+  T: 1000
+  state_indices: all
+irl:
+  training_trajs: 10
+  n_itrs: 600
+  save_interval: 0
+  eval_episodes: 20
+  expert_episodes: 16
+  resample_episodes: 10
+sac:
+  k: 1
+  epochs: 5
+  log_step_interval: 5000
+  update_every: 1
+  random_explore_episodes: 1
+  update_num: 1
+  batch_size: 100
+  lr: 0.0003
+  alpha: 1.0
+  automatic_alpha_tuning: false
+  buffer_size: 1000000
+  num_test_episodes: 10
+  reinitialize: false
+
+reward:
+  use_bn: false
+  residual: false
+  hid_act: relu
+  hidden_sizes: [128, 128]
+  clamp_magnitude: 10
+  lr: 0.0001
+  weight_decay: 1e-3
+  gradient_step: 1
+  momentum: 0.9
+disc:
+  reinit: false
+  model_type: resnet_disc
+  num_layer_blocks: 6
+  hid_dim: 128
+  hid_act: tanh
+  use_bn: false
+  clamp_magnitude: 10.0
+  batch_size: 800
+  lr: 0.0003
+  weight_decay: 0.0001
+  momentum: 0.9
+  iter: 1200
+critic:
+  lam: 0.5
+  model_type: resnet_disc
+  num_layer_blocks: 3
+  hid_dim: 128
+  hid_act: tanh
+  use_bn: false
+  batch_size: 800
+  lr: 0.0003
+  weight_decay: 0.0001
+  momentum: 0.0
+  iter: 1200
+adv_irl: # https://github.com/KamyarGh/rl_swiss/blob/master/exp_specs/adv_irl.yaml
+  normalize: true
+  airl_rew_shaping: false
+  num_epochs: 400
+  num_steps_per_epoch: 50000
+  num_steps_between_train_calls: 1000
+  min_steps_before_training: 5000
+  num_update_loops_per_train_call: 2
+  num_disc_updates_per_loop_iter: 1
+  num_policy_updates_per_loop_iter: 1
+  disc_optim_batch_size: 256
+  policy_optim_batch_size: 100
+  disc_lr: 0.0001
+  disc_momentum: 0.0
+  use_grad_pen: false
+  grad_pen_weight: 2.0 # [2.0, 4.0, 8.0, 16.0]
+  reward_scale: 1.0  # [2.0, 4.0, 8.0, 16.0]
+  save_interval: 0
+  eval_interval: 200
+  replay_buffer_size: 10000
+  disc:
+    model_type: mlp_disc
+    num_layer_blocks: 2
+    hid_dim: 256
+    hid_act: relu
+    use_bn: false
+    clamp_magnitude: false

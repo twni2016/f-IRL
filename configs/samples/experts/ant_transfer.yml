@@ -1,0 +1,29 @@
+seed: 1
+cuda: -1
+experiment_tag: ant_expert_500
+env:
+  env_name: CustomAnt-v0
+  T: 500
+  state_indices: all
+sac:
+  epochs: 2000
+  log_step_interval: 5000
+  update_every: 50
+  update_num: 1
+  random_explore_episodes: 10
+  batch_size: 100
+  lr: 1e-3
+  alpha: 0.2
+  automatic_alpha_tuning: false
+  buffer_size: 1000000
+  num_test_episodes: 10
+expert:
+  samples_episode: 64
+
+reward: # from irl model
+  use_bn: false
+  residual: false
+  hid_act: relu
+  hidden_sizes: [128, 128]
+  clamp_magnitude: 10
+  path: expert_data/reward_models/ant_transfer/reward_model_itr964_det1297_sto1252.pkl # demo

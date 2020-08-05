@@ -1,0 +1,93 @@
+obj: 'fkl'
+IS: False
+seed: 1
+cuda: 0
+
+task:
+  expert_samples_n: 10000 
+  task_name: 'uniform'
+  goal: [2, 2]
+  goal_radius: 0.5
+
+env:
+  env_name: "ContinuousVecGridEnv-v0"
+  T: 30 
+  state_indices: [0,1] # if true, will only add timestep to Q functions
+  add_time: False
+  size_x: 6
+  size_y: 6
+
+irl:  
+  training_trajs: 1000
+  n_itrs: 800
+  save_interval: 50
+  eval_interval: 50
+  
+sac:
+  k: 1
+  epochs: 30 # to use AIRL training schedual, change to 60k/30 :2000
+  log_step_interval: 30 # to use AIRL training schedual, can change log frequency to be larger, e.g. 300
+  update_every: 1 # update frequency. to use AIRL training schedule, change to 300
+  update_num: 1 # how many update steps at each update time. to use AIRL training schedule, change to 20.
+  random_explore_episodes: 5 # to use AIRL training schedule, change to 35 or 33. roughly 1000 steps.
+  batch_size: 256 # 64
+  lr: 0.003 # 3e-3
+  alpha: 1.0
+  automatic_alpha_tuning: False
+  reinitialize: False
+  buffer_size: 12000 # 6000
+
+reward:
+  arch: 'mlp'
+  output_activation: 'clamp' # 'no', 'sigmoid', or 'clamp'.
+  hidden_sizes: [64, 64]
+  lr: 0.001
+  weight_decay: 0
+  gradient_step: 1
+  momentum: 0.9
+
+adv_irl: 
+  # for comparsion with ours: Disc/SAC training iterations:
+  # num_epochs * num_steps_per_epoch / num_steps_between_train_calls * num_disc_updates_per_loop_iter
+  num_epochs: 800
+  num_steps_per_epoch: 300
+  num_steps_between_train_calls: 5
+  min_steps_before_training: 500 # wait for enough samples to do density fit
+  num_update_loops_per_train_call: 1 # fixed one
+  num_disc_updates_per_loop_iter: 1 #orignal 5, change to 1 for fair comparison.
+  num_policy_updates_per_loop_iter: 5
+  num_initial_disc_iters: 1000
+
+  disc_optim_batch_size: 128 # 800
+  disc_lr: 0.0003
+  disc_momentum: 0.0
+  use_grad_pen: False
+  grad_pen_weight: 1.0 # NOTE 10.0
+  rew_clip_min: -10.0 # None
+  rew_clip_max: 10.0  # None
+  reward_scale: 1.0  # NOTE tune this: 1/alpha
+
+  eval_interval: 5000 # interval in terms of discriminator / reward update
+
+disc:
+  model_type: 'resnet_disc'
+  num_layer_blocks: 6
+  hid_dim: 128
+  hid_act: 'tanh'
+  use_bn: True
+  clamp_magnitude: 10.0
+density:
+  model: 'kde'
+  kde:
+    bandwidth: 0.2 # may be adaptive by cross validation
+    kernel: 'epanechnikov'
+  gmm:
+    component: 10
+    covariance_type: 'full'
+  vae:
+    code_dim: 4
+    mlp_dim: 32
+
+evaluation:
+  epochs: 300
+  random_explore_episodes: 100

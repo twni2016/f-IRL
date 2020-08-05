@@ -1,0 +1,86 @@
+obj: fkl
+IS: false
+seed: 1
+cuda: -1
+task:
+  expert_samples_n: 10000
+  task_name: gaussian
+  goal:
+  - -0.21
+  - 0
+  goal_radius: 0.05
+env:
+  env_name: ReacherDraw-v0
+  T: 30
+  state_indices:
+  - 0
+  - 1
+  add_time: false
+irl:
+  training_trajs: 1000
+  n_itrs: 800
+  save_interval: 0
+sac:
+  k: 1
+  epochs: 10
+  log_step_interval: 100
+  update_every: 1
+  update_num: 1
+  random_explore_episodes: 5
+  batch_size: 256
+  lr: 0.003
+  alpha: 1.0
+  automatic_alpha_tuning: false
+  reinitialize: false
+  buffer_size: 12000
+reward:
+  use_bn: false
+  residual: false
+  hid_act: relu
+  hidden_sizes: [64, 64]
+  clamp_magnitude: 10
+  lr: 0.001
+  weight_decay: 0.0
+  gradient_step: 2
+  momentum: 0.9
+
+adv_irl:
+  num_epochs: 800
+  num_steps_per_epoch: 300
+  num_steps_between_train_calls: 15
+  min_steps_before_training: 500
+  num_update_loops_per_train_call: 1
+  num_disc_updates_per_loop_iter: 1
+  num_policy_updates_per_loop_iter: 15
+  num_initial_disc_iters: 1000
+  disc_optim_batch_size: 128
+  disc_lr: 0.0003
+  disc_momentum: 0.0
+  use_grad_pen: false
+  grad_pen_weight: 1.0
+  rew_clip_min: -10.0
+  rew_clip_max: 10.0
+  reward_scale: 1.0
+  save_interval: 0
+  eval_interval: 200
+  disc:
+    model_type: resnet_disc
+    num_layer_blocks: 6
+    hid_dim: 128
+    hid_act: tanh
+    use_bn: true
+    clamp_magnitude: 10.0
+density:
+  model: kde
+  kde:
+    bandwidth: 0.02
+    kernel: epanechnikov
+  gmm:
+    component: 10
+    covariance_type: full
+  vae:
+    code_dim: 4
+    mlp_dim: 32
+evaluation:
+  epochs: 150
+  random_explore_episodes: 0

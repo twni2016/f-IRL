@@ -1,0 +1,16 @@
+# MacOS
+.DS_Store
+
+# Python
+__pycache__/
+build/
+.ipynb_checkpoints
+*.ipynb
+
+.vscode/
+
+# logs, a soft link to disk
+logs/
+
+# videos, a soft link to disk
+data/videos
