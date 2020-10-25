@@ -1,4 +1,4 @@
-# $f$-IRL: Inverse Reinforcement Learning via State Marginal Matching
+# f-IRL: Inverse Reinforcement Learning via State Marginal Matching
 Appear in Conference on Robot Learning (CoRL) 2020. This repository is to reproduce the results for our method and baselines showed in the paper.
 [Arxiv link], [Website link]
 
@@ -11,7 +11,7 @@ where *indicates equal contributions (order by dice rolling)
 - [MuJoCo](https://www.roboti.us/license.html)
 - `pip install ruamel.yaml` 
 - Download expert data that are used in our paper from [Google Drive](https://drive.google.com/drive/folders/1exDW5cyqRIEBmfBW2uRXSFOlJOBdKPtR?usp=sharing) as `expert_data/` folder
-  - `states/`: expert state trajectories for each environment. We obtain two sets of state trajectories for our method/MaxEntIRL (`*.pt`) and AIRL (`*_airl.pt`), respectively.
+  - `states/`: expert state trajectories for each environment. We obtain two sets of state trajectories for our method/MaxEntIRL/f-MAX (`*.pt`) and AIRL (`*_airl.pt`), respectively.
   - `actions/`: expert action trajectories for each environment for AIRL (`*_airl.pt`)
   - `meta/`: expert reward curves through training
   - `reward_models/`: the reward models saved from our algorithm
