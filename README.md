@@ -13,7 +13,7 @@ where *indicates equal contributions (order by dice rolling)
 - Download expert data that are used in our paper from [Google Drive](https://drive.google.com/drive/folders/1exDW5cyqRIEBmfBW2uRXSFOlJOBdKPtR?usp=sharing) as `expert_data/` folder
   - `states/`: expert state trajectories for each environment. We obtain two sets of state trajectories for our method/MaxEntIRL/f-MAX (`*.pt`) and AIRL (`*_airl.pt`), respectively.
   - `actions/`: expert action trajectories for each environment for AIRL (`*_airl.pt`)
-  - `meta/`: expert reward curves through training
+  - `meta/`: meta information including expert reward curves through training
   - `reward_models/`: the reward models saved from our algorithm
 
 ## File Structure
@@ -41,7 +41,7 @@ where *indicates equal contributions (order by dice rolling)
 ## Experiments
 All the commands below are also provided in `run.sh`.
 
-### Sec 5.1 Density task (Reacher)
+### Sec 5.1 Density task (Reacher2d)
 
 ```bash
 # our method and maxentirl. you can vary obj in {`fkl`, `rkl`, `js`, `maxentirl`}
@@ -130,33 +130,7 @@ If you find our paper useful to your research, please cite the paper:
 
 Parts of the codes are used from the references mentioned below:
 
-- AIRL: https://github.com/justinjfu/inverse_rl in part of `envs/` 
-- f-MAX: https://github.com/KamyarGh/rl_swiss/blob/master/run_scripts/adv_smm_exp_script.py in part of `baselines/`
-- SAC: https://github.com/openai/spinningup/tree/master/spinup/algos/pytorch/sac in part of `common/sac`
-- NPEET: https://github.com/gregversteeg/NPEET in part of `utils/it_estimator.py`
-
-Citation for the papers:
-```
-@article{ghasemipour2019divergence,
-  title={A Divergence Minimization Perspective on Imitation Learning Methods},
-  author={Ghasemipour, Seyed Kamyar Seyed and Zemel, Richard and Gu, Shixiang},
-  journal={arXiv preprint arXiv:1911.02256},
-  year={2019}
-}
-@article{fu2017learning,
-  title={Learning robust rewards with adversarial inverse reinforcement learning},
-  author={Fu, Justin and Luo, Katie and Levine, Sergey},
-  journal={arXiv preprint arXiv:1710.11248},
-  year={2017}
-}
-@article{SpinningUp2018,
-    author = {Achiam, Joshua},
-    title = {{Spinning Up in Deep Reinforcement Learning}},
-    year = {2018}
-}
-@article{ver2000non,
-  title={Non-parametric entropy estimation toolbox (npeet)},
-  author={Ver Steeg, Greg},
-  year={2000}
-}
-```
+- [AIRL](https://github.com/justinjfu/inverse_rl) in part of `envs/` 
+- [f-MAX](https://github.com/KamyarGh/rl_swiss/blob/master/run_scripts/adv_smm_exp_script.py) in part of `baselines/`
+- [SAC](https://github.com/openai/spinningup/tree/master/spinup/algos/pytorch/sac) in part of `common/sac`
+- [NPEET](https://github.com/gregversteeg/NPEET) in part of `utils/it_estimator.py`
