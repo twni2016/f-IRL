@@ -118,7 +118,16 @@ python common/train_optimal.py configs/samples/experts/ant_transfer.yml
 ```
 
 
-## Important Note
+## References
+If you find our paper useful to your research, please cite the paper:
+```
+@article{,
+  title={f-IRL: Inverse Reinforcement Learning via State Marginal Matching},
+  author={},
+  year={2020}
+}
+```
+
 Parts of the codes are used from the references mentioned below:
 
 - AIRL: https://github.com/justinjfu/inverse_rl in part of `envs/` 
