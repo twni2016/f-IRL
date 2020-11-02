@@ -1,8 +1,8 @@
 # f-IRL: Inverse Reinforcement Learning via State Marginal Matching
 Appear in Conference on Robot Learning (CoRL) 2020. This repository is to reproduce the results for our method and baselines showed in the paper.
-[Arxiv link], [Website link]
+[Arxiv link], [Website link](https://sites.google.com/view/f-irl/home)
 
-Authors: Tejus Gupta*, Tianwei Ni*, Harshit Sikchi*, Yufei Wang*, Benjamin Eysenbach, Lisa Lee.
+Authors: Tianwei Ni*, Harshit Sikchi*, Yufei Wang*, Tejus Gupta*, Benjamin Eysenbach, Lisa Lee.
 where *indicates equal contributions (order by dice rolling)
 
 ## Installation
