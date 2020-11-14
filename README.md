@@ -77,7 +77,7 @@ python common/train_optimal.py configs/samples/experts/halfcheetah.yml
 ```
 
 ### Sec 5.3.1 Downstream task 
-First, run $f$-IRL or the baselines on the pointmass gridworld with a uniform expert density: 
+First, run f-IRL or the baselines on the pointmass gridworld with a uniform expert density: 
 ```bash
 # you can change the obj in grid_uniform.yml to be {`fkl`, `rkl`, `js`, `maxentirl`}
 python firl/irl_density.py configs/density/grid_uniform.yml 
