@@ -119,7 +119,7 @@ python common/train_optimal.py configs/samples/experts/ant_transfer.yml
 
 
 ## References
-If you find our paper useful to your research, please cite the paper:
+If you find our paper useful to your research, please cite the paper: 
 ```
 @inproceedings{firl2020corl,
   title={f-IRL: Inverse Reinforcement Learning via State Marginal Matching},
