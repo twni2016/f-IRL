@@ -57,19 +57,6 @@ class SquashedGaussianMLPActor(nn.Module):
         pi_action = self.act_limit * pi_action
 
         return pi_action, logp_pi
-        
-    def log_prob_unclipped(self,obs,action):
-        net_out = self.net(obs)
-        mu = self.mu_layer(net_out)
-        log_std = self.log_std_layer(net_out)
-        log_std = torch.clamp(log_std, LOG_STD_MIN, LOG_STD_MAX)
-        
-        std = torch.exp(log_std)
-        pi_distribution = Normal(mu, std)
-        
-        pi_action = action
-        logp_pi = pi_distribution.log_prob(pi_action).sum(axis=-1)
-        return logp_pi
 
     def log_prob(self, obs, act):
         net_out = self.net(obs)
@@ -169,19 +156,10 @@ class MLPActorCritic(nn.Module):
         act_dim = action_space.shape[0]
         act_limit = action_space.high[0]
         self.device = device
-        # print("MLP actor critic device: ", device)
-
-        # build policy and value functions
-        # if add_time: # policy ignores the time index. only Q function uses the time index
-        #     self.pi = SquashedGaussianMLPActor(obs_dim - 1, act_dim, hidden_sizes, activation, act_limit).to(self.device)
-        # else:
-
-        # old code: gaussian
-        #self.pi = SquashedGaussianMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit).to(self.device)
 
         if k == 1:
             self.pi = SquashedGaussianMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit).to(self.device)
-        else:
+        else: # we did not use GMM policy, this is experimental.
             self.pi = SquashedGmmMLPActor(obs_dim, act_dim, hidden_sizes, activation, act_limit, k).to(self.device)
         self.q1 = MLPQFunction(obs_dim, act_dim, hidden_sizes, activation).to(self.device)
         self.q2 = MLPQFunction(obs_dim, act_dim, hidden_sizes, activation).to(self.device)
