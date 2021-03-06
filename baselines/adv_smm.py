@@ -20,21 +20,6 @@ import os, copy
 import os.path as osp
 
 class AdvSMM:
-    '''
-        Depending on choice of reward function and size of replay
-        buffer this will be the SMM equivalent of:
-            - AIRL
-            - GAIL (without extra entropy term)
-            - FAIRL
-            - Discriminator Actor Critic: TODO wrap_absorbing
-            (I did not implement the reward-wrapping mentioned in DAC though)
-
-        Features removed from v1.0:
-            - gradient clipping
-            - target disc (exponential moving average disc)
-            - target policy (exponential moving average policy)
-            - disc input noise
-    '''
     def __init__(
         self,
         env_fn, 
@@ -207,7 +192,7 @@ class AdvSMM:
 
             self.try_evaluate("Running", epoch)
 
-            if self.expert_IS and self.save_interval > 0 and epoch % self.save_interval == 0: # or we can just save the best KL model?
+            if self.expert_IS and self.save_interval > 0 and epoch % self.save_interval == 0:
                 save_name = osp.join(self.logger.get_dir(), f"model/disc_epoch_{epoch}.pkl")
                 torch.save(self.discriminator.state_dict(), save_name)
                 # save_name = osp.join(self.logger.get_dir(), f"model/agent_epoch_{epoch}.pkl")
@@ -228,11 +213,6 @@ class AdvSMM:
             # disc_stat = np.zeros((3,))
             for _ in range(self.num_initial_disc_iters):
                 self._do_reward_training(epoch) # disc_stat += 
-            # disc_stat /= self.num_initial_disc_iters
-            # self.record_discrim(disc_stat)
-            # self.logger.record_tabular("epoch", 0)
-            # self.logger.record_tabular("train_step", self._n_train_steps_total - 1)
-            # self.logger.dump_tabular()
 
             self.not_done_initial_disc_iters = False
 
