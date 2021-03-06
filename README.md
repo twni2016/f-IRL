@@ -17,7 +17,7 @@ where `*` indicates equal contribution (order by dice rolling) and `°` equal ad
   - `reward_models/`: the reward models saved from our algorithm
 
 ## File Structure
-- f-IRL (Our method): `firl/`
+- f-IRL (our method): `firl/`
 - Baselines (f-MAX, AIRL, BC): `baselines/`
 - SAC agent: `common/`
 - Environments: `envs/`
@@ -27,14 +27,8 @@ where `*` indicates equal contribution (order by dice rolling) and `°` equal ad
 - All the experiments are to be run under the root folder. 
 - Before starting experiments, please `export PYTHONPATH=${PWD}:$PYTHONPATH` for env variable. 
 - We use yaml files in `configs/` for experimental configurations, please change `obj` value (in the first line) for each method, here is the list of `obj` values:
-    -  f-IRL (FKL): `fkl`
-    -  f-IRL (RKL): `rkl`
-    -  f-IRL (JS): `js`
-    -  MaxEntIRL: `maxentirl`
-    -  f-MAX-RKL: `f-max-rkl`
-    -  GAIL: `gail`
-    -  AIRL: `airl`
-    -  BC: `bc`
+    -  Our methods (f-IRL): FKL: `fkl`, RKL: `rkl`, JS: `js`
+    -  Baselines: MaxEntIRL: `maxentirl`, f-MAX-RKL: `f-max-rkl`, GAIL: `gail`, AIRL: `airl`, BC: `bc`
 - Please keep all the other values in yaml files unchanged to reproduce the results in our paper.
 - After running, you will see the training logs in `logs/` folder.
 
@@ -118,7 +112,7 @@ python common/train_optimal.py configs/samples/experts/ant_transfer.yml
 ```
 
 
-## References
+## Citation and References
 If you find our paper useful to your research, please cite the paper: 
 ```
 @inproceedings{firl2020corl,
