@@ -15,7 +15,6 @@ class ResNetAIRLDisc(nn.Module):
         use_bn=True,
         clamp_magnitude=10.0
     ):
-    # TODO: add LayerNorm https://pytorch.org/docs/master/generated/torch.nn.LayerNorm.html
         super().__init__()
 
         if hid_act == 'relu':
