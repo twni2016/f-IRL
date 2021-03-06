@@ -1,7 +1,7 @@
-# '''
-# Code from spinningup repo.
-# Refer[Original Code]: https://github.com/openai/spinningup/tree/master/spinup/algos/pytorch/sac
-# '''
+'''
+Code from spinningup repo.
+Refer[Original Code]: https://github.com/openai/spinningup/tree/master/spinup/algos/pytorch/sac
+'''
 import numpy as np
 import torch
 import torch.nn as nn
@@ -43,11 +43,6 @@ class SquashedGaussianMLPActor(nn.Module):
             pi_action = pi_distribution.rsample()
 
         if with_logprob:
-            # Compute logprob from Gaussian, and then apply correction for Tanh squashing.
-            # NOTE: The correction formula is a little bit magic. To get an understanding 
-            # of where it comes from, check out the original SAC paper (arXiv 1801.01290) 
-            # and look in appendix C. This is a more numerically-stable equivalent to Eq 21.
-            # Try deriving it yourself as a (very difficult) exercise. :)
             logp_pi = pi_distribution.log_prob(pi_action).sum(axis=-1)
             logp_pi -= (2*(np.log(2) - pi_action - F.softplus(-2*pi_action))).sum(axis=1)
         else:
@@ -72,11 +67,6 @@ class SquashedGaussianMLPActor(nn.Module):
         act = act / self.act_limit
         act = torch.atanh(act) # arctan to project [-1,1] to real
 
-        # Compute logprob from Gaussian, and then apply correction for Tanh squashing.
-        # NOTE: The correction formula is a little bit magic. To get an understanding 
-        # of where it comes from, check out the original SAC paper (arXiv 1801.01290) 
-        # and look in appendix C. This is a more numerically-stable equivalent to Eq 21.
-        # Try deriving it yourself as a (very difficult) exercise. :)
         logp_pi = pi_distribution.log_prob(act).sum(axis=-1)
         logp_pi -= (2*(np.log(2) - act - F.softplus(-2*act))).sum(axis=1)
 
@@ -86,7 +76,6 @@ class SquashedGmmMLPActor(nn.Module):
 
     def __init__(self, obs_dim, act_dim, hidden_sizes, activation, act_limit, k):
         super().__init__()
-        print("gmm")
         self.net = mlp([obs_dim] + list(hidden_sizes), activation, activation)
         self.mu_layer = nn.Linear(hidden_sizes[-1], k*act_dim)
         self.log_std_layer = nn.Linear(hidden_sizes[-1], k*act_dim)
