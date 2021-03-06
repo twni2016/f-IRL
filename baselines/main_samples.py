@@ -51,7 +51,6 @@ if __name__ == "__main__":
     print('pid', os.getpid())
     with open(os.path.join(logger.get_dir(), 'variant.json'), 'w') as f:
         json.dump(v, f, indent=2, sort_keys=True)
-    # os.makedirs(os.path.join(log_folder, 'plt'))
     os.makedirs(os.path.join(log_folder, 'model'))
 
     # environment
@@ -126,7 +125,6 @@ if __name__ == "__main__":
         device=device,
         logger=logger,
         collect_fn=collect.collect_trajectories_policy_single,
-        # replay_buffer_size=v['sac']['buffer_size'],
         **v['adv_irl'],
         training_trajs=v['irl']['training_trajs'],
         expert_IS=False,
