@@ -67,6 +67,10 @@ class SquashedGaussianMLPActor(nn.Module):
 
         # Pre-squash distribution and sample
         pi_distribution = Normal(mu, std)
+        # 20210306: fix this bug for reversal operation on action. 
+        # this may improve AIRL results, leaving for future work.
+        act = act / self.act_limit
+        act = torch.atanh(act) # arctan to project [-1,1] to real
 
         # Compute logprob from Gaussian, and then apply correction for Tanh squashing.
         # NOTE: The correction formula is a little bit magic. To get an understanding 
