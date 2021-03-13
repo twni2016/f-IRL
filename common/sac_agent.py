@@ -65,7 +65,7 @@ class SquashedGaussianMLPActor(nn.Module):
         # 20210306: fix this bug for reversal operation on action. 
         # this may improve AIRL results, leaving for future work.
         act = act / self.act_limit
-        act = torch.atanh(act) # arctan to project [-1,1] to real
+        act = torch.atanh(act) # arctanh to project [-1,1] to real
 
         logp_pi = pi_distribution.log_prob(act).sum(axis=-1)
         logp_pi -= (2*(np.log(2) - act - F.softplus(-2*act))).sum(axis=1)
