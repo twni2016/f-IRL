@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Ni"
+  given-names: "Tianwei"
+- family-names: "Sikchi"
+  given-names: "Harshit"
+- family-names: "Wang"
+  given-names: "Yufei"
+- family-names: "Gupta"
+  given-names: "Tejus"
+title: "f-IRL: Inverse Reinforcement Learning via State Marginal Matching"
+version: 1.0.0
+doi: 10.5281/zenodo.1234
+date-released: 2021-10-12
+url: "https://github.com/twni2016/f-IRL"
