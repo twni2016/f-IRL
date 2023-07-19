@@ -5,6 +5,9 @@ Appear in Conference on Robot Learning (CoRL) 2020. This repository is to reprod
 Authors: Tianwei Ni*, Harshit Sikchi*, Yufei Wang*, Tejus Gupta*, Lisa Lee°, Benjamin Eysenbach°.
 where `*` indicates equal contribution (order by dice rolling) and `°` equal advising.
 
+Note: This repository also contains implementation for prior imitation learning methods like [f-MAX](https://arxiv.org/abs/1911.02256), [AIRL](https://arxiv.org/abs/1710.11248), [MaxEntIRL](https://cdn.aaai.org/AAAI/2008/AAAI08-227.pdf), [GAIL+SAC](https://arxiv.org/abs/1606.03476) and Behavior Cloning.
+
+
 ## Installation
 - PyTorch 1.5+
 - OpenAI Gym
@@ -18,7 +21,7 @@ where `*` indicates equal contribution (order by dice rolling) and `°` equal ad
 
 ## File Structure
 - f-IRL (our method): `firl/`
-- Baselines (f-MAX, AIRL, BC): `baselines/`
+- Baselines ([f-MAX](https://arxiv.org/abs/1911.02256), [AIRL](https://arxiv.org/abs/1710.11248), [MaxEntIRL](https://cdn.aaai.org/AAAI/2008/AAAI08-227.pdf), [GAIL+SAC](https://arxiv.org/abs/1606.03476), BC): `baselines/`
 - SAC agent: `common/`
 - Environments: `envs/`
 - Configurations: `configs/`
